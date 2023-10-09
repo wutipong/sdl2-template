@@ -1,7 +1,7 @@
 #include <SDL2/SDL.h>
 #include <imgui.h>
-#include <imgui_impl_sdl.h>
-#include <imgui_impl_sdlrenderer.h>
+#include <imgui_impl_sdl2.h>
+#include <imgui_impl_sdlrenderer2.h>
 
 #include <memory>
 
@@ -30,7 +30,7 @@ int main(int argc, char **argv)
         ImGui::CreateContext();
 
         ImGui_ImplSDL2_InitForSDLRenderer(window.get(), renderer.get());
-        ImGui_ImplSDLRenderer_Init(renderer.get());
+        ImGui_ImplSDLRenderer2_Init(renderer.get());
 
         bool is_running{true};
         while (is_running)
@@ -49,7 +49,7 @@ int main(int argc, char **argv)
             SDL_RenderClear(renderer.get());
 
             ImGui_ImplSDL2_NewFrame(window.get());
-            ImGui_ImplSDLRenderer_NewFrame();
+            ImGui_ImplSDLRenderer2_NewFrame();
 
             ImGui::NewFrame();
             {
@@ -66,12 +66,12 @@ int main(int argc, char **argv)
             ImGui::EndFrame();
             ImGui::Render();
 
-            ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
+            ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
             SDL_RenderPresent(renderer.get());
             SDL_Delay(1);
         }
 
-        ImGui_ImplSDLRenderer_Shutdown();
+        ImGui_ImplSDLRenderer2_Shutdown();
         ImGui_ImplSDL2_Shutdown();
         ImGui::DestroyContext();
     }
