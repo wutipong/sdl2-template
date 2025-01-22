@@ -46,7 +46,7 @@ int main(int argc, char **argv)
 
         SDL_RenderClear(renderer.get());
 
-        ImGui_ImplSDL2_NewFrame(window.get());
+        ImGui_ImplSDL2_NewFrame();
         ImGui_ImplSDLRenderer2_NewFrame();
 
         ImGui::NewFrame();
@@ -64,7 +64,7 @@ int main(int argc, char **argv)
         ImGui::EndFrame();
         ImGui::Render();
 
-        ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
+        ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData(), renderer.get());
         SDL_RenderPresent(renderer.get());
         SDL_Delay(1);
     }
